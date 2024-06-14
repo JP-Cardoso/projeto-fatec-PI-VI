@@ -36,7 +36,6 @@ export class AnalyticService {
   }
 
   async predict(items) {
-    //faça um mapper no python para tratar esse cara
     const reqOptions = {
       url: "http://localhost:5000/predict",
       method: "POST",
