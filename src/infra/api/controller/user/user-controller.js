@@ -8,6 +8,7 @@ export class UserController {
   async handle(req, res) {
     try {
       const { nome, email, password } = req.body;
+      console.log(req.body);
       const userRepository = new UserRepository();
       const createUserUseCase = new CreateUserUseCase(userRepository);
       const user = await createUserUseCase.execute({ nome, email, password });

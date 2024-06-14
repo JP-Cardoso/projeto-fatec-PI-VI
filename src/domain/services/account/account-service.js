@@ -8,8 +8,8 @@ export class AccountService {
 
     return {
       idDoCliente: data.id,
-      saldo: 5000,
-      agencia: 1234,
+        saldo: 5000,
+        agencia: 1234,
       status: status.pendente
     }
   }
