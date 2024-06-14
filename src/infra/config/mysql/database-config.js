@@ -13,7 +13,6 @@ export const sequelize = new Sequelize(
   {
     host: host,
     port: 3306,
-    dialect: 'mysql',
+    dialect: 'mysql'
   }
-
 )
