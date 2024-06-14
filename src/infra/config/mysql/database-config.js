@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import dotenv from 'dotenv';
 dotenv.config();
 
+import mysql2 from 'mysql2';
 if (options.dialect === 'mysql') {
   options.dialectModule = mysql2;
 }
@@ -17,6 +18,8 @@ export const sequelize = new Sequelize(
   {
     host: host,
     port: 3306,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectModule: mysql2
   }
+
 )
