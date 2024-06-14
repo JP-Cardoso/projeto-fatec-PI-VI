@@ -1,3 +1,7 @@
+import axios from "axios";
+import { CreateAccountUseCase } from "../../useCases/account/create.js";
+import { AccountRepository } from "../../repository/account/account-repository.js";
+
 export class AnalyticService {
 
   #url = "http://localhost:5000/predict";
@@ -31,21 +35,23 @@ export class AnalyticService {
     }
   }
 
-  async predict(data) {
+  async predict(items) {
     //faça um mapper no python para tratar esse cara
+    const reqOptions = {
+      url: "http://localhost:5000/predict",
+      method: "POST",
+      headers: { "Accept": "*/*", "Content-Type": "application/json" },
+      data: items,
+    };
+
     try {
-      const response = await fetch(this.#url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json' // Tipo de conteúdo
-        },
-        body: JSON.stringify(data)
-      })
-      const responseData = await response.json();
-      console.log(responseData.resultado);
-      return responseData.resultado;
+      const response = await axios.request(reqOptions);
+      const result = response.data;
+      const createAccountRepository = new AccountRepository();
+      const account = new CreateAccountUseCase(createAccountRepository);
+      await account.updated(result);
     } catch (error) {
-      console.error('Erro ao enviar dados:', error);
+      console.error("error", error);
     }
   }
 

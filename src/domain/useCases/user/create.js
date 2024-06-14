@@ -9,6 +9,6 @@ export class CreateUserUseCase {
   async execute(params) {
     const userService = new CreateUserService();
     const user = await userService.execute(params);
-    return this.userRepository.save(user);
+    return await this.userRepository.save(user);
   }
 }

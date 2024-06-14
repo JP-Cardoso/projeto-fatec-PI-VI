@@ -17,6 +17,8 @@ export class CreateAccountUseCase {
   }
 
   async updated(data) {
-    const result = await this.repository.updatedById()
+    console.log(data);
+    console.log(this.repository);
+    const result = await this.repository.updatedById(data)
   }
 }

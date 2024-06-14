@@ -19,11 +19,12 @@ export class AccountRepository {
   }
 
   async updatedById(data) {
+    console.log(data);
     const account = await AccountModel.update(
-      { status: data.resultado },
+      { status: data.resposta == 'Digno de Crédito' ? "ATIVADO" : "DESATIVADO" },
       {
         where: {
-          idConta: data.id
+          idConta: data.idConta
         }
       }
     );
