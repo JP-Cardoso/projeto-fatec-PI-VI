@@ -19,6 +19,8 @@ router.put("/user/:id", authMiddleware, userController.update);
 router.post("/auth", authController.authenticate);
 
 router.post("/account", accountController.create);
+router.get("/account/:id", accountController.getByID);
+
 
 router.post("/analytics", analyticsController.handle);
 

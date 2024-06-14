@@ -14,7 +14,6 @@ export class AccountRepository {
         }
       }
     );
-
     return account;
   }
 

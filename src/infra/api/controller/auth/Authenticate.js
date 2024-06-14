@@ -12,7 +12,7 @@ export class AuthenticateController {
       const data = await authUseCase.execute(email, password);
       res.status(200).send({ data });
     } catch (error) {
-      res.status(500);
+      res.status(401).send({ msg: error.message });
     }
   }
 } 
