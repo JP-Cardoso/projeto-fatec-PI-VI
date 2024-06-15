@@ -11,6 +11,7 @@ export class AnalyticUseCase {
     const predict = new AnalyticService();
     await this.repository.create(dataSaved);
     const result = await predict.predict(dataSaved);
+    await predict.publisherMessager((AnalyticService.formatDataEndTransformBuffer(dataSaved)))
     return result
   }
 

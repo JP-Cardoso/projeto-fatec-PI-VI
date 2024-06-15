@@ -1,6 +1,7 @@
 import axios from "axios";
 import { CreateAccountUseCase } from "../../useCases/account/create.js";
 import { AccountRepository } from "../../repository/account/account-repository.js";
+import { Pub } from "../../../infra/utils/gcp/pub.utils.js";
 
 export class AnalyticService {
 
@@ -14,24 +15,24 @@ export class AnalyticService {
 
   static formatData(data) {
     return {
-      idConta: data.idDaConta,
-      genero: data.genero,
-      carro_proprio: data.carro_proprio,
-      casa_propria: data.casa_propria,
-      filhos: data.filhos,
-      tipo_de_renda: data.tipo_de_renda,
-      grau_de_escolaridade: data.grau_de_escolaridade,
-      estado_civil: data.estado_civil,
-      tipo_de_moradia: data.tipo_de_moradia,
-      celular: data.celular,
-      telefone_trabalho: data.telefone_trabalho,
-      telefone: data.telefone,
-      email: data.email,
-      membros_da_familia: data.membros_da_familia,
-      faixa_etaria: data.faixa_etaria,
-      renda_anual: data.renda_anual,
-      tempo_emprego: data.tempo_emprego,
-      tempo_registro_dados: data.tempo_registro_dados
+      idConta: data.idConta,
+      genero: Number(data.genero),
+      carro_proprio: Number(data.carro_proprio),
+      casa_propria: Number(data.casa_propria),
+      filhos: Number(data.filhos),
+      tipo_de_renda: Number(data.tipo_de_renda),
+      grau_de_escolaridade: Number(data.grau_de_escolaridade),
+      estado_civil: Number(data.estado_civil),
+      tipo_de_moradia: Number(data.tipo_de_moradia),
+      celular: Number(data.celular),
+      telefone_trabalho: Number(data.telefone_trabalho),
+      telefone: Number(data.telefone),
+      email: Number(data.email),
+      membros_da_familia: Number(data.membros_da_familia),
+      faixa_etaria: Number(data.faixa_etaria),
+      renda_anual: Number(data.renda_anual),
+      tempo_emprego: Number(data.tempo_emprego),
+      tempo_registro_dados: Number(data.tempo_registro_dado)
     }
   }
 
@@ -49,9 +50,17 @@ export class AnalyticService {
       const createAccountRepository = new AccountRepository();
       const account = new CreateAccountUseCase(createAccountRepository);
       await account.updated(result);
+      return result;
     } catch (error) {
       console.error("error", error);
     }
   }
+
+
+  async publisherMessager(data) {
+    const pub = new Pub();
+    await pub.publishMessage(data)
+  }
+
 
 }
