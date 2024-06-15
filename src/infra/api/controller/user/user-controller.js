@@ -15,7 +15,7 @@ export class UserController {
       res.status(201).send({ msg: "usuário cadastrado com sucesso" });
     } catch (error) {
       console.log("ERROR7", error.message);
-      res.status(500).send({ msg: "Erro interno" });
+      res.status(500).send({ msg: error.message });
     }
 
   }
